@@ -1,11 +1,6 @@
 <template>
-  
   <div>
     <navbar/>
-    
-    <main class="form-signin">
-      <router-view/>
-    </main>
   </div>
 </template>
 

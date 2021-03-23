@@ -1,44 +1,36 @@
 <template>
     <div>
-        <form @submit.prevent="handlePlus()">
-            <button class="w-100 btn btn-lg btn-primary" type="submit" @click="waiting()">
-                <div v-if="loading" class="spinner-border spinner-border-sm"></div>
-            PRESS
-            </button>
-        </form>   
-        <div v-if="this.getUserInfos===null">Bonjour</div>
-        <div v-else>Bonjour {{this.getUserInfos.name}}</div>
+        <Sidebar v-on:change-list="changeList($event)"/>
+        <Todos  :id="listId"/>
     </div>
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex'
+import Sidebar from '../components/Sidebar'
+import Todos from '../components/Todos'
 
 export default {
     name: 'Home',
     data() {
         return {
-            loading: false
+            listId: 0
         }
     },
+    components: {
+        Sidebar,
+        Todos
+    },
     methods: {
-        ...mapActions("account", ["getUser"]),
-        mounted() {
-            this.getUser()
-        },
-        handlePlus() {
-            this.getUser(this.getToken)
-        },
-        waiting() {
-            this.loading=!false
-            setTimeout(()=>{
-                this.loading=!true
-            },2000)
+        changeList(id) {
+            this.listId = id
         }
     },
     computed: {
-        ...mapGetters("account", ["getToken", "getUserInfos"])
     }
 
 }
 </script>
+
+<style scoped>
+
+</style>

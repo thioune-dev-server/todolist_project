@@ -13,7 +13,8 @@
           </ul>
         </div>
       </div>
-    </nav>
+  </nav>
+  <router-view></router-view>
 </template>
 
 <script>

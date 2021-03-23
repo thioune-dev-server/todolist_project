@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class=".center">
         <form  @submit.prevent="handleSubmit()">
             <h1 class="h3 mb-3 fw-normal">Page d'insciprtion</h1>
 
@@ -9,7 +9,7 @@
             
             <input type="password" class="form-control" placeholder="Mot de passe" required v-model="password">
 
-            <button class="w-100 btn btn-lg btn-primary" type="submit">S'enregistrer</button>
+            <br><button class="w-100 btn btn-lg btn-primary" type="submit">S'enregistrer</button>
         </form>
     </div>
 </template>
@@ -43,6 +43,14 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.center {
+  margin: 0 auto;
+  width: 100%;
+}
+form {
+  margin: 0 auto;
+  width: 500px; /*find your value*/
+  text-align: center;
+}
 </style>
