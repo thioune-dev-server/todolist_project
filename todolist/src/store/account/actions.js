@@ -6,7 +6,7 @@ export function register({commit}, data) {
         .post("http://138.68.74.39/api/register?",{name: data.name, email: data.email, password: data.password})
         .then(function (response) {
             commit("SET_TOKEN", response.data)
-            router.push("/login")
+            router.push("/")
         })
         .catch(function (error) {
             console.log(error) 

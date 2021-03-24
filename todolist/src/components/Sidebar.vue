@@ -1,10 +1,10 @@
 <template>
   <div class="container-fluid">
-      <div class="row">
+      <div class="row" v-show="this.getToken!=null">
           <div class="col-md-2 bg-light d-none d-md-block sidebar">
               <div class="left-sidebar">
                 <h1>Todolist</h1>
-                <br><input type="text" class="TodoList" placeholder="Ajouter une Todolist" v-model="todoListName" @keyup.enter="add"><br><br>
+                <br><input type="text" class="ajout" placeholder="Ajouter une Todolist" v-model="todoListName" @keyup.enter="add"><br><br>
                 <ul class="nav flex-column">
                     <li class="nav-item" v-for="(list,id) in Lists" v-bind:key="id"> 
                          <br><button @click="updateList(id)">{{list.name}} </button>
@@ -63,5 +63,12 @@ export default {
     padding: 70px 0 0 10px;
     border-right: 1px solid #d3d3d3;
 }
+
+.left-sidebar{display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    margin-left: 6px;
+}
+
 
 </style>

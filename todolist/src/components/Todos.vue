@@ -1,27 +1,20 @@
 <template>
-  <div class="todolist">
+  <div class="todolist" v-show="this.getToken!=null">
     <h1 class="text-4xl text-gray-500">Todos</h1>
     <input placeholder="Ajouter une tâche" v-model="todolistName" @keyup.enter="add"/><br><br>
     <div>
         <ul class="flex justify-center">
             <li class="nav-item" v-for="(todo,id) in Lists[0].todos" v-bind:key="id"> 
-                <input type="checkbox" v-model="completTodo"><span class="todo">{{todo.name}}</span>
-                <button class="delete" v-on:click="deleteTodo">Supprimer</button>
+                <input type="checkbox"><span class="todo">{{todo.name}} </span> 
+                <button class="delete" v-on:click="del(id)">Supprimer</button>
             </li><br>
         </ul>
     </div>
-    <div>
-      <ul class="flex justify-center">
-        <li>
-          <button>Toutes les tâches</button>
-        </li>
-       <br><li>
-          <button>Tâches faites</button>
-        </li>
-        <br><li>
-          <button>Tâches à faire</button>
-        </li>        
-      </ul>
+    <div class="flex justify-center">
+        <button>Toutes les tâches</button>
+        <button>Tâches faites</button>
+        <button>Tâches à faire</button>
+        <br><br>
       <h3>Restantes :</h3>
       <h3>Achevées :</h3>
     </div>
@@ -40,9 +33,10 @@ export default {
     },
     props: ["listId"],
     methods: {
-        ...mapActions("todolist", ["createTodo"]),
+        ...mapActions("todolist", ["createTodo","deleteTodo"]),
         mounted() {
             this.createTodo()
+            this.deleteTodo()
         },
         created() {
             this.$store.dispatch('todolist/actions/loadLists')
@@ -52,10 +46,17 @@ export default {
                 tokenStored: this.getToken,
                 name: this.todolistName,
                 completed: 0,
-                id: 0
+                id: 1
             }
             this.createTodo(data)
             this.todolistName = ''
+        },
+        del(todoId) {
+            const data = {
+                tokenStored: this.getToken,
+                id: todoId
+            }
+            this.deleteTodo(data)
         }
     },
     computed: {

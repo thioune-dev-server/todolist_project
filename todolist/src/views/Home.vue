@@ -1,5 +1,6 @@
 <template>
-    <div>
+    <div> 
+        <Message/>     
         <Sidebar v-on:change-list="changeList($event)"/>
         <Todos  :id="listId"/>
     </div>
@@ -8,6 +9,7 @@
 <script>
 import Sidebar from '../components/Sidebar'
 import Todos from '../components/Todos'
+import Message from '../components/Message'
 
 export default {
     name: 'Home',
@@ -18,7 +20,8 @@ export default {
     },
     components: {
         Sidebar,
-        Todos
+        Todos,
+        Message
     },
     methods: {
         changeList(id) {
@@ -26,11 +29,13 @@ export default {
         }
     },
     computed: {
+        
     }
 
 }
 </script>
 
 <style scoped>
+
 
 </style>

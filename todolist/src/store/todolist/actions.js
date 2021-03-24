@@ -31,13 +31,14 @@ export function loadTodoList({commit}, tokenStored) {
 }
 
 export function createTodo({commit}, data) {
+    commit("ADD_TODO", data)
     axios.post("http://138.68.74.39/api/todo?", {name: data.name, completed: data.completed, todolist_id: data.id}, {
         headers: {
             'Authorization' : 'Bearer ' + data.tokenStored.token
         }
     })
     .then(function() {
-        commit("ADD_TODO", data)
+        
     })
     .catch(function (error) {
         console.log(error)
@@ -59,13 +60,14 @@ export function completeTodo({commit}, data) {
 }
 
 export function deleteTodo({commit}, data) {
-    axios.post("http://138.68.74.39/api/todo/"+data.todoId, {
+    commit("DELETE_TODO", data.id)
+    axios.post("http://138.68.74.39/api/todo/"+data.id, {
         headers: {
             'Authorization' : 'Bearer ' + data.tokenStored.token
         }
     })
     .then(function() {
-        commit("DELETE_TODO", data.todoId)
+        
     })
     .catch(function (error) {
         console.log(error)
